@@ -22,8 +22,6 @@
     const axios = require('axios')
     const MockAdapter = require('axios-mock-adapter')
 
-    const axiosMock = new MockAdapter(axios)
-
     export default {
         name: 'ApiDemo',
         created() {
@@ -34,13 +32,13 @@
         },
         data() {
             return {
-                loading: true,
+                axiosMock: new MockAdapter(axios),
                 mockData: {}
             }
         },
         methods: {
             getData() {
-                axiosMock.onGet("/users").reply(200, {
+                this.axiosMock.onGet("/users").reply(200, {
                     users: [{id: 1, name: "John Smith"}, {id: 2, name: "Toby Jorris"}]
                 })
 
